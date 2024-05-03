@@ -71,23 +71,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-			 	<groupId>sh.tak.appbundler</groupId>
-			  	<artifactId>appbundle-maven-plugin</artifactId>
-			  	<version>1.2.0</version>
-			  	<executions>
-			    	<execution>
-			      		<phase>package</phase>
-			      		<goals>
-			        		<goal>bundle</goal>
-			      		</goals>
-			      		<configuration>
-					    	<mainClass>com.jvms.i18neditor.Main</mainClass>
-					    	<iconFile>images/icons.icns</iconFile>
-					  	</configuration>
-			    	</execution>
-			  	</executions>
-			</plugin>
-			<plugin>
 				<groupId>com.akathist.maven.plugins.launch4j</groupId>
 				<artifactId>launch4j-maven-plugin</artifactId>
 				<version>1.7.7</version>
