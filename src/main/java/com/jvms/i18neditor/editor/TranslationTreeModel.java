@@ -4,6 +4,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 
 import com.google.common.collect.Lists;
 import com.jvms.i18neditor.util.MessageBundle;
@@ -28,12 +29,21 @@ public class TranslationTreeModel extends DefaultTreeModel {
 	public Enumeration<TranslationTreeNode> getEnumeration() {
 		return getEnumeration((TranslationTreeNode) getRoot());
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public Enumeration<TranslationTreeNode> getEnumeration(TranslationTreeNode node) {
-		return node.depthFirstEnumeration();
+		return new Enumeration<TranslationTreeNode>() {
+			Enumeration<TreeNode> e = node.depthFirstEnumeration();
+
+			public TranslationTreeNode nextElement() {
+				return (TranslationTreeNode) e.nextElement();
+			}
+
+			public boolean hasMoreElements() {
+				return e.hasMoreElements();
+			}
+		};
 	}
-	
+
 	public TranslationTreeNode getNodeByKey(String key) {
 		Enumeration<TranslationTreeNode> e = getEnumeration();
 	    while (e.hasMoreElements()) {

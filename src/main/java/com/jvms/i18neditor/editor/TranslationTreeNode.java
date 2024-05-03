@@ -1,9 +1,6 @@
 package com.jvms.i18neditor.editor;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -58,12 +55,19 @@ public class TranslationTreeNode extends DefaultMutableTreeNode {
 				.collect(Collectors.toList());
 		return ResourceKeys.create(parts);
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public List<TranslationTreeNode> getChildren() {
-		return Collections.list(children());
+		Enumeration<TreeNode> children = children();
+		List<TranslationTreeNode> childList = new ArrayList<>();
+		while (children.hasMoreElements()) {
+			Object node = children.nextElement();
+			if (node instanceof TranslationTreeNode) {
+				childList.add((TranslationTreeNode) node);
+			}
+		}
+		return childList;
 	}
-	
+
 	public TranslationTreeNode getChild(String name) {
 		Optional<TranslationTreeNode> child = getChildren().stream()
 				.filter(i -> i.getName().equals(name))
